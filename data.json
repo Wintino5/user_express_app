@@ -1,0 +1,27 @@
+[
+  {
+    "username": "GetRight",
+    "email": "GT@test.com",
+    "password": "GGTT"
+  },
+  {
+    "username": "Red",
+    "email": "Red@test.com",
+    "password": "redred"
+  },
+  {
+    "username": "Red",
+    "email": "Red@test.com",
+    "password": "redred"
+  },
+  {
+    "username": "Frank",
+    "email": "FrankCastle@test.com",
+    "password": "Castle"
+  },
+  {
+    "username": "Spongebob",
+    "email": "IloveSandy@test.com",
+    "password": "Cheeks"
+  }
+]
