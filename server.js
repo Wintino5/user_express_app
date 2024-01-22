@@ -1,21 +1,13 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const cors = require('cors')
+const cors = require('cors');
+
+
 const PORT = 3333;
 
 const app = express();
 
-async function getUserData() {
-    const users = await fs.promises.readFile('./data.json', 'utf8');
+const api_routes = require('./routes/api_routes')
 
-    return JSON.parse(users);
-}
-async function saveUserData(usersArr) {
-    await fs.promises.writeFile('./data.json', JSON.stringify(usersArr, null, 2));
-
-    console.log('User Data Updated')
-}
 
 
 
@@ -24,44 +16,8 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
-app.use(cors());
-// app.get('/', (requestObj, responseObj) => {
-//     responseObj.sendFile(path.join(__dirname, './public/index.html'))
-// });
-
-// app.get('/css/styles.css', (requestObj, responseObj) => {
-//     responseObj.sendFile(path.join(__dirname, './public/css/style.css'))
-// });
-
-// Route to retrieve/Get all users from the json database
-app.get('/api/users', async (requestObj, responseObj) => {
-    // Read the json file data
-    const users = await fs.promises.readFile('./data.json', 'utf8');
-
-    responseObj.send(users);
-});
-
-// Route to add a user to the json database
-app.post('/api/users', async (requestObj, responseObj) => {
-    const users = await getUserData();
-
-    if (!users.find(user => user.username === requestObj.body.username) && requestObj.body.username) {
-        users.push(requestObj.body);
-
-        await saveUserData(users);
-
-        return responseObj.send({
-            messgae: 'User added Succesfully'
-        })
-    }
-
-    responseObj.send({
-        error: 402,
-        message: 'User already exists'
-    });
-
-});
-
+// Load Routes
+app.use('/api', api_routes);
 
 // Start routes listening
 app.listen(PORT, () => {
@@ -94,6 +50,16 @@ app.listen(PORT, () => {
 
 
 
+// app.use(cors());
+// app.get('/', (requestObj, responseObj) => {
+//     responseObj.sendFile(path.join(__dirname, './public/index.html'))
+// });
+
+// app.get('/css/styles.css', (requestObj, responseObj) => {
+//     responseObj.sendFile(path.join(__dirname, './public/css/style.css'))
+// });
+
+// Route to retrieve/Get all users from the json database
 
 
 
