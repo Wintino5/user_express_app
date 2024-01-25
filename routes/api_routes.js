@@ -100,7 +100,7 @@ router.get('/users/:id', async (requestObj, responseObj) => {
 });
 
 // DELETE Route to remove a user from the database
-router.delete('/user/:id', async (requestObj, responseObj) => {
+router.delete('/users/:id', async (requestObj, responseObj) => {
     const user_id = requestObj.params.id;
     // Get the user data
 
